@@ -1,35 +1,15 @@
-<h1>New Recipe</h1>
-
-<form action="/recipes" method="POST">
-    <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title" required>
-    </div>
-    
-    <div class="mb-3">
-        <label for="categoryId" class="form-label">Category</label>
-        <select class="form-select" id="categoryId" name="categoryId">
-            <option value="">Select a category</option>
-            <% if (categories && categories.length > 0) { %>
-                <% categories.forEach(function(category) { %>
-                    <option value="<%= category.id %>"><%= category.name %></option>
-                <% }); %>
-            <% } %>
-        </select>
-    </div>
-    
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" name="description" rows="2" required></textarea>
-    </div>
-    
-    <div class="mb-3">
-        <label for="instructions" class="form-label">Instructions</label>
-        <textarea class="form-control" id="instructions" name="instructions" rows="5" required></textarea>
-    </div>
-    
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Create Recipe</button>
-        <a href="/recipes" class="btn btn-outline-secondary">Cancel</a>
-    </div>
-</form>
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">New Recipe</h5>
+  </div>
+  <div class="card-body">
+    <form action="/recipes" method="POST">
+      <%- include('../partials/recipe-form', { 
+        recipe: recipe, 
+        categories: categories, 
+        errors: errors || {}, 
+        cancelUrl: '/recipes' 
+      }) %>
+    </form>
+  </div>
+</div>

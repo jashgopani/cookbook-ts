@@ -1,0 +1,62 @@
+<div class="mb-3">
+  <label for="title" class="form-label">Title</label>
+  <input 
+    type="text" 
+    class="form-control <%= errors.title ? 'is-invalid' : '' %>" 
+    id="title" 
+    name="title" 
+    value="<%= recipe.title || '' %>" 
+    required
+  >
+  <% if (errors.title) { %>
+    <div class="invalid-feedback"><%= errors.title %></div>
+  <% } %>
+</div>
+
+<div class="mb-3">
+  <label for="categoryId" class="form-label">Category</label>
+  <select class="form-select <%= errors.categoryId ? 'is-invalid' : '' %>" id="categoryId" name="categoryId" required>
+    <option value="" disabled <%= !recipe.category ? 'selected' : '' %>>Select a category</option>
+    <% categories.forEach(category => { %>
+      <option value="<%= category.id %>" <%= (recipe.category && recipe.category.id === category.id) ? 'selected' : '' %>>
+        <%= category.name %>
+      </option>
+    <% }); %>
+  </select>
+  <% if (errors.categoryId) { %>
+    <div class="invalid-feedback"><%= errors.categoryId %></div>
+  <% } %>
+</div>
+
+<div class="mb-3">
+  <label for="description" class="form-label">Description</label>
+  <textarea 
+    class="form-control <%= errors.description ? 'is-invalid' : '' %>" 
+    id="description" 
+    name="description" 
+    rows="3" 
+    required
+  ><%= recipe.description || '' %></textarea>
+  <% if (errors.description) { %>
+    <div class="invalid-feedback"><%= errors.description %></div>
+  <% } %>
+</div>
+
+<div class="mb-3">
+  <label for="instructions" class="form-label">Instructions</label>
+  <textarea 
+    class="form-control <%= errors.instructions ? 'is-invalid' : '' %>" 
+    id="instructions" 
+    name="instructions" 
+    rows="6" 
+    required
+  ><%= recipe.instructions || '' %></textarea>
+  <% if (errors.instructions) { %>
+    <div class="invalid-feedback"><%= errors.instructions %></div>
+  <% } %>
+</div>
+
+<div class="d-flex justify-content-between">
+  <a href="<%= cancelUrl %>" class="btn btn-secondary">Cancel</a>
+  <button type="submit" class="btn btn-primary">Save</button>
+</div>

@@ -1,7 +1,11 @@
 <div class="btn-group">
   <a href="<%= backUrl %>" class="btn btn-outline-secondary">Back</a>
   <a href="<%= editUrl %>" class="btn btn-outline-primary">Edit</a>
-  <form action="<%= deleteUrl %>" method="POST" style="display: contents;">
-    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this <%= entityName %>?')">Delete</button>
-  </form>
+  <a href="#" class="btn btn-outline-danger" 
+     onclick="if(confirm('Are you sure you want to delete this <%= entityName %>?')) document.getElementById('delete-form-<%= entityId %>').submit();">
+     Delete
+  </a>
 </div>
+
+<form id="delete-form-<%= entityId %>" action="<%= deleteUrl %>" method="POST" style="display:none;">
+</form>

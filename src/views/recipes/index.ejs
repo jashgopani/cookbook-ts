@@ -1,37 +1,26 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Recipes</h1>
-    <a href="/recipes/new" class="btn btn-primary">New Recipe</a>
+  <h1>Recipes</h1>
+  <a href="/recipes/new" class="btn btn-primary">New Recipe</a>
 </div>
 
-<div class="row">
-    <% if (recipes && recipes.length > 0) { %>
-        <% recipes.forEach(function(recipe) { %>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= recipe.title %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <%= recipe.category ? recipe.category.name : 'No Category' %>
-                        </h6>
-                        <p class="card-text"><%= recipe.description %></p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="btn-group w-100">
-                            <a href="/recipes/<%= recipe.id %>" class="btn btn-sm btn-outline-primary">View</a>
-                            <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <form action="/recipes/<%= recipe.id %>?_method=DELETE" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% }); %>
-    <% } else { %>
-        <div class="col-12">
-            <div class="alert alert-info">
-                No recipes found. <a href="/recipes/new">Create your first recipe</a>.
-            </div>
+<% if (recipes.length === 0) { %>
+  <div class="alert alert-info">No recipes found. Create one!</div>
+<% } else { %>
+  <div class="list-group">
+    <% recipes.forEach(recipe => { %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="mb-1"><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h5>
+          <small class="text-muted">Category: <%= recipe.category ? recipe.category.name : 'None' %></small>
         </div>
-    <% } %>
-</div>
+        <%- include('../partials/button-group', {
+          backUrl: '/',
+          editUrl: `/recipes/${recipe.id}/edit`,
+          deleteUrl: `/recipes/${recipe.id}?_method=DELETE`,
+          entityName: 'recipe',
+          entityId: recipe.id
+        }) %>
+      </div>
+    <% }); %>
+  </div>
+<% } %>

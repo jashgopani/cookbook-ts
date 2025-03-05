@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0"><%= recipe.title %></h5>
-    <div class="btn-group">
-      <a href="/recipes" class="btn btn-outline-secondary">Back</a>
-      <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-outline-primary">Edit</a>
-      <form action="/recipes/<%= recipe.id %>?_method=DELETE" method="POST" style="display: contents;">
-        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</button>
-      </form>
-    </div>
+    <%- include('../partials/button-group', {
+      backUrl: '/recipes',
+      editUrl: `/recipes/${recipe.id}/edit`,
+      deleteUrl: `/recipes/${recipe.id}?_method=DELETE`,
+      entityName: 'recipe',
+      entityId: recipe.id
+    }) %>
   </div>
   <div class="card-body">
     <h6 class="card-subtitle mb-2 text-muted">Category: <%= recipe.category ? recipe.category.name : 'None' %></h6>
