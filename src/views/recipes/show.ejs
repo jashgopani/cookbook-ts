@@ -4,7 +4,7 @@
     <div class="btn-group">
       <a href="/recipes" class="btn btn-outline-secondary">Back</a>
       <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-outline-primary">Edit</a>
-      <form action="/recipes/<%= recipe.id %>?_method=DELETE" method="POST" class="d-inline">
+      <form action="/recipes/<%= recipe.id %>?_method=DELETE" method="POST" style="display: contents;">
         <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</button>
       </form>
     </div>
