@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><%= category.name %></h5>
+    <div class="btn-group"></div>
+      <a href="/categories" class="btn btn-outline-secondary">Back</a>
+      <a href="/categories/<%= category.id %>/edit" class="btn btn-outline-primary">Edit</a>
+      <a href="/categories/<%= category.id %>/edit" class="btn btn-outline-danger">Edita</a>
+      <form action="/categories/<%= category.id %>?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+      </form>
+    </div>
+  </div>
+  <div class="card-body">
+    <h6>Recipes in this category:</h6>
+    <% if (category.recipes && category.recipes.length > 0) { %>
+      <ul class="list-group">
+        <% category.recipes.forEach(recipe => { %>
+          <li class="list-group-item">
+            <a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No recipes in this category.</p>
+    <% } %>
+  </div>
+  <div class="card-footer text-muted">
+    Created: <%= category.createdAt.toLocaleDateString() %> | Updated: <%= category.updatedAt.toLocaleDateString() %>
+  </div>
+</div>

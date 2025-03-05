@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><%= recipe.title %></h5>
+    <div class="btn-group">
+      <a href="/recipes" class="btn btn-outline-secondary">Back</a>
+      <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-outline-primary">Edit</a>
+      <form action="/recipes/<%= recipe.id %>?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</button>
+      </form>
+    </div>
+  </div>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Category: <%= recipe.category ? recipe.category.name : 'None' %></h6>
+    <p class="card-text"><%= recipe.description %></p>
+    <hr>
+    <h6>Instructions:</h6>
+    <p class="card-text"><%= recipe.instructions %></p>
+  </div>
+  <div class="card-footer text-muted">
+    Created: <%= recipe.createdAt.toLocaleDateString() %> | Updated: <%= recipe.updatedAt.toLocaleDateString() %>
+  </div>
+</div>
